@@ -42,7 +42,7 @@ header {
 		}
 		p {
 			margin: 0;
-			color: #9D9D9D;
+			color: #9d9d9d;
 		}
 	}
 	.headerRight {
@@ -230,6 +230,11 @@ header {
 	&:active {
 		background: darken(#9dd558, 20%);
 	}
+	&:disabled {
+		background: darken(#9dd558, 90%);
+		animation: button-loading 0.9s ease-in-out infinite;
+		cursor: default;
+	}
 	img {
 		transition: 0.3s ease-in-out;
 	}
@@ -238,6 +243,18 @@ header {
 	}
 	.btnBack {
 		margin-right: 10px;
+	}
+  }
+
+@keyframes button-loading {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.7;
+	}
+	100% {
+		opacity: 1;
 	}
 }
 

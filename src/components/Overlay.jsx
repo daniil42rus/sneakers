@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Info } from './Info';
+import { AppContext } from '../App';
+import axios from 'axios';
 
 export const Overlay = ({ onClose, onRemove, items = [] }) => {
 	let summ = 0;
@@ -8,6 +10,36 @@ export const Overlay = ({ onClose, onRemove, items = [] }) => {
 	}
 
 	let rate = (summ * 5) / 100;
+
+	const [orderId, setOrderId] = useState(null);
+	const [isOrderComplete, setIsOrderComplete] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+	const { cartItems, setCartItems } = useContext(AppContext);
+
+	const onClickOrder = async () => {
+		try {
+			setIsLoading(true);
+			const { data } = await axios.post('http://localhost:3004/orders', {
+				items: cartItems,
+			});
+			setOrderId(Number(data.id));
+			console.log(data);
+			setIsOrderComplete(true);
+			setCartItems([]);
+
+			for (let i = 0; i < cartItems.length; i++) {
+				const item = cartItems[i];
+
+				await axios.delete(`http://localhost:3004/cart/${item.id}`)
+				
+			}
+			// await axios.patch('http://localhost:3004/cart', []);
+		} catch (error) {
+			alert('Ошибка в корзине');
+			console.log(error);
+		}
+		setIsLoading(false);
+	};
 
 	return (
 		<div className="overlay">
@@ -58,17 +90,27 @@ export const Overlay = ({ onClose, onRemove, items = [] }) => {
 									<b>{rate} руб.</b>
 								</li>
 							</ul>
-							<button className="greenButton">
+							<button
+								disabled={isLoading}
+								onClick={onClickOrder}
+								className="greenButton"
+							>
 								Оформить заказ
 								<img className="btnApply" src="/img/arrow.svg" alt="Arrow" />
 							</button>
 						</div>
 					</>
 				) : (
-					<Info 
-					image={'/img/empty.png'}
-					title={'Корзина пуста'}
-					description={'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ'}
+					<Info
+						image={
+							isOrderComplete ? '/img/complite-order.png' : '/img/empty.png'
+						}
+						title={isOrderComplete ? 'Заказ оформлен' : 'Корзина пуста'}
+						description={
+							isOrderComplete
+								? `Ваш заказ #${orderId} скоро будет передан курьерской доставке`
+								: 'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ'
+						}
 					/>
 				)}
 			</div>
