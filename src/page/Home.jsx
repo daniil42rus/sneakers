@@ -1,37 +1,9 @@
 import React, { useContext } from 'react';
-import { Card } from '../components/Card';
 import { AppContext } from '../App';
+import { RenderItems } from '../components/RenderItems';
 
-export const Home = ({
-	searchValue,
-	onCangeSearchInpue,
-	setSearchValue,
-	items,
-	onAddToFavorite,
-	onAddToCart,
-	// cartItems,
-	// isLoading,
-}) => {
-	const { isLoading } = useContext(AppContext);
-
-	const renderItems = () => {
-		return isLoading
-			? [...Array(8)].map(() => <Card />)
-			: items
-					.filter((item) =>
-						item.name.toLowerCase().includes(searchValue.toLowerCase())
-					)
-					.map((item, index) => (
-						<Card
-							key={index}
-							// added={isItemAdded(item && item.id)}
-							onFavorite={(obj) => onAddToFavorite(obj)}
-							onPlus={(obj) => onAddToCart(obj)}
-							loading={isLoading}
-							{...item}
-						/>
-					));
-	};
+export const Home = ({ searchValue, onCangeSearchInpue, setSearchValue }) => {
+	const { items } = useContext(AppContext);
 
 	return (
 		<div className="content">
@@ -55,7 +27,9 @@ export const Home = ({
 					)}
 				</div>
 			</div>
-			<div className="cards">{renderItems()}</div>
+			<div className="cards">
+				<RenderItems items={items} />
+			</div>
 		</div>
 	);
 };

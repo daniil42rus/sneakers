@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Route } from 'react-router-dom';
 import { Home } from './page/Home';
 import { Favorites } from './page/Favorites';
+import { Orders } from './page/Orders';
 
 export const AppContext = createContext({});
 
@@ -150,6 +151,10 @@ function App() {
 		return cartItems.some((obj) => Number(obj.id) === Number(id));
 	};
 
+	const isFavAdded = (id) => {
+		return favoriteItems.some((obj) => Number(obj.id) === Number(id));
+	};
+
 	return (
 		<AppContext.Provider
 			value={{
@@ -160,6 +165,9 @@ function App() {
 				isItemAdded,
 				setCartClick,
 				setCartItems,
+				onAddToFavorite,
+				onAddToCart,
+				isFavAdded,
 			}}
 		>
 			<div className="wrapper">
@@ -171,24 +179,21 @@ function App() {
 					/>
 				)}
 
-				<Header items={cartItems} onOpenCart={() => setCartClick(!cartClick)} />
+				<Header onOpenCart={() => setCartClick(!cartClick)} />
 				<Route path="/" exact>
 					<Home
 						searchValue={searchValue}
 						onCangeSearchInpue={onCangeSearchInpue}
 						setSearchValue={setSearchValue}
-						items={items}
-						cartItems={cartItems}
 						onAddToFavorite={onAddToFavorite}
-						onAddToCart={onAddToCart}
-						// isLoading={isLoading}
 					/>
 				</Route>
 				<Route path="/favorites">
-					<Favorites
-						// items={favoriteItems}
-						onAddToFavorite={onAddToFavorite}
-					/>
+					<Favorites />
+				</Route>
+
+				<Route path="/oders">
+					<Orders />
 				</Route>
 			</div>
 		</AppContext.Provider>

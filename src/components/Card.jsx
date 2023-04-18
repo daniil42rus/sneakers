@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import ContentLoader from 'react-content-loader';
 import { AppContext } from '../App';
 
@@ -10,14 +10,13 @@ export const Card = ({
 	onPlus,
 	favorited = false,
 	id,
-	// added = false,
 	loading = true,
 }) => {
-
 	const { isItemAdded } = useContext(AppContext);
+	const { isFavAdded } = useContext(AppContext);
 
 	// const [isAddeed, setIsAdded] = useState(added);
-	const [isFavorite, setIsFavorite] = useState(favorited);
+	// const [isFavorite, setIsFavorite] = useState(favorited);
 
 	const handlePlus = () => {
 		onPlus({ id, name, price, imageUrl });
@@ -26,7 +25,7 @@ export const Card = ({
 
 	const onClickFavorite = () => {
 		onFavorite({ id, name, price, imageUrl });
-		setIsFavorite(!isFavorite);
+		// setIsFavorite(!isFavorite);
 	};
 
 	return (
@@ -51,12 +50,18 @@ export const Card = ({
 					<button className="favorite" onClick={onClickFavorite}>
 						<img
 							src={
-								isFavorite ? '/img/heart-liked.svg' : '/img/heart-unliked.svg'
+								isFavAdded(id)
+									? '/img/heart-liked.svg'
+									: '/img/heart-unliked.svg'
 							}
 							alt="Unliked"
 						/>
 					</button>
-					<img width={133} height={112} src={imageUrl} alt="Sneakers" />
+					<img 
+					width='100%'
+					//  height={112} 
+					 src={imageUrl} 
+					 alt="Sneakers" />
 					<p>{name}</p>
 					<div className="cardContent">
 						<div className="cardBottom">
@@ -65,7 +70,9 @@ export const Card = ({
 						</div>
 						<button onClick={handlePlus}>
 							<img
-								src={isItemAdded(id) ? '/img/btn-checked.svg' : '/img/btn-plus.svg'}
+								src={
+									isItemAdded(id) ? '/img/btn-checked.svg' : '/img/btn-plus.svg'
+								}
 								alt="Plus"
 							/>
 						</button>

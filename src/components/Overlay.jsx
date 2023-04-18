@@ -1,20 +1,21 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Info } from './Info';
-import { AppContext } from '../App';
+// import { AppContext } from '../App';
 import axios from 'axios';
+import { useCart } from '../hooks/useCart';
 
 export const Overlay = ({ onClose, onRemove, items = [] }) => {
-	let summ = 0;
-	for (let item of items) {
-		summ = summ + item.price;
-	}
-
-	let rate = (summ * 5) / 100;
-
 	const [orderId, setOrderId] = useState(null);
 	const [isOrderComplete, setIsOrderComplete] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	const { cartItems, setCartItems } = useContext(AppContext);
+
+	// const { cartItems, setCartItems } = useContext(AppContext);
+	// const summ = cartItems.reduce(
+	// 	(accumulator, currentValue) => accumulator + currentValue.price,
+	// 	0
+	// );
+
+	const { cartItems, setCartItems, summ } = useCart();
 
 	const onClickOrder = async () => {
 		try {
@@ -30,8 +31,7 @@ export const Overlay = ({ onClose, onRemove, items = [] }) => {
 			for (let i = 0; i < cartItems.length; i++) {
 				const item = cartItems[i];
 
-				await axios.delete(`http://localhost:3004/cart/${item.id}`)
-				
+				await axios.delete(`http://localhost:3004/cart/${item.id}`);
 			}
 			// await axios.patch('http://localhost:3004/cart', []);
 		} catch (error) {
@@ -87,7 +87,7 @@ export const Overlay = ({ onClose, onRemove, items = [] }) => {
 								<li>
 									<span>Нолог 5%</span>
 									<div></div>
-									<b>{rate} руб.</b>
+									<b>{(summ * 5) / 100} руб.</b>
 								</li>
 							</ul>
 							<button

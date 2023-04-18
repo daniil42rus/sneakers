@@ -1,35 +1,27 @@
 import React, { useContext } from 'react';
-import { Card } from '../components/Card';
 import { AppContext } from '../App';
+import { RenderItems } from '../components/RenderItems';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
+import { Empty } from '../components/Empty';
 
-export const Favorites = ({
-	// items,
-	onAddToFavorite,
-}) => {
+export const Favorites = () => {
 	const { favoriteItems } = useContext(AppContext);
-	const { isLoading } = useContext(AppContext);
-
-	const renderItems = () => {
-		return isLoading
-			? [...Array(8)].map(() => <Card />)
-			: favoriteItems.map((item, index) => (
-					<Card
-						key={index}
-						{...item}
-						favorited={true}
-						onFavorite={onAddToFavorite}
-						loading={isLoading}
-					/>
-			  ));
-	};
 
 	return (
 		<div className="content">
 			<div className="contentHead">
-				<h1>{favoriteItems.length ? 'Избранное' : 'Ничего нет'}</h1>
+				<h1>{favoriteItems.length ? 'Избранное' : ''}</h1>
 			</div>
 			<div className="cards">
-				{renderItems()}
+				{favoriteItems.length ? (
+					<RenderItems items={favoriteItems} />
+				) : (
+					<Empty
+						heading={'Закладок нет :('}
+						description={'Вы ничего не добавляли в закладки'}
+						imgUrl={'/img/tears.png'}
+					/>
+				)}
 			</div>
 		</div>
 	);

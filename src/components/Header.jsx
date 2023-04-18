@@ -1,11 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+// import { AppContext } from '../App';
+
+import { useCart } from '../hooks/useCart';
 
 export const Header = (props) => {
-	let summ = 0;
-	for (let item of props.items) {
-		summ = summ + item.price;
-	}
+	// const { cartItems } = useContext(AppContext);
+
+	// const summ = cartItems.reduce(
+	// 	(accumulator, currentValue) => accumulator + currentValue.price,
+	// 	0
+	// );
+	const { summ } = useCart();
 
 	return (
 		<header>
@@ -30,7 +36,9 @@ export const Header = (props) => {
 					</Link>
 				</li>
 				<li>
-					<img width={18} height={18} src="/img/user.svg" alt="user" />
+					<Link to="/oders">
+						<img width={18} height={18} src="/img/user.svg" alt="user" />
+					</Link>
 				</li>
 			</ul>
 		</header>
