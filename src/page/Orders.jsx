@@ -33,7 +33,7 @@ export const Orders = () => {
 					<Empty
 						heading={'У вас нет заказов'}
 						description={'Оформите хотя бы один заказ'}
-						imgUrl={'/img/sad.png'}
+						imgUrl={'img/sad.png'}
 					/>
 				)}
 			</div>

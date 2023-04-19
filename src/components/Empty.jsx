@@ -7,9 +7,9 @@ export const Empty = ({ heading, description, imgUrl }) => {
 			<img width={70} height={70} src={imgUrl} alt="SoSad" />
 			<h3>{heading}</h3>
 			<span>{description}</span>
-			<Link to="/">
+			<Link to="">
 				<button className="greenButton">
-					<img className="btnBack" src="/img/back-arrow.svg" alt="Arrow" />
+					<img className="btnBack" src="img/back-arrow.svg" alt="Arrow" />
 					Вернуться назад
 				</button>
 			</Link>

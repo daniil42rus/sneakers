@@ -10,7 +10,7 @@ export const Home = ({ searchValue, onCangeSearchInpue, setSearchValue }) => {
 			<div className="contentHead">
 				<h1>{searchValue ? `Поиск: "${searchValue}"` : 'Все кроссовокки'}</h1>
 				<div className="search-block">
-					<img src="/img/search.svg" alt="Search" />
+					<img src="img/search.svg" alt="Search" />
 					<input
 						value={searchValue}
 						onChange={onCangeSearchInpue}
@@ -20,7 +20,7 @@ export const Home = ({ searchValue, onCangeSearchInpue, setSearchValue }) => {
 					{searchValue && (
 						<img
 							width={20}
-							src="/img/btn-remove.svg"
+							src="img/btn-remove.svg"
 							alt="Remove"
 							onClick={() => setSearchValue('')}
 						/>

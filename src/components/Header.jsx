@@ -15,9 +15,9 @@ export const Header = (props) => {
 
 	return (
 		<header>
-			<Link to="/">
+			<Link to="">
 				<div className="headerLeft">
-					<img width={40} height={40} src="/img/logo.png" alt="logo" />
+					<img width={40} height={40} src="img/logo.png" alt="logo" />
 					<div className="headerInfo">
 						<h3>React Sneakers</h3>
 						<p>Магазин кроссовок</p>
@@ -26,18 +26,18 @@ export const Header = (props) => {
 			</Link>
 			<ul className="headerRight">
 				<li onClick={props.onOpenCart}>
-					<img width={18} height={18} src="/img/card.svg" alt="card" />
+					<img width={18} height={18} src="img/card.svg" alt="card" />
 
 					<span>{summ} руб.</span>
 				</li>
 				<li>
-					<Link to="/favorites">
-						<img width={18} height={18} src="/img/heart.svg" alt="heart" />
+					<Link to="favorites">
+						<img width={18} height={18} src="img/heart.svg" alt="heart" />
 					</Link>
 				</li>
 				<li>
-					<Link to="/oders">
-						<img width={18} height={18} src="/img/user.svg" alt="user" />
+					<Link to="oders">
+						<img width={18} height={18} src="img/user.svg" alt="user" />
 					</Link>
 				</li>
 			</ul>

@@ -19,7 +19,7 @@ export const Favorites = () => {
 					<Empty
 						heading={'Закладок нет :('}
 						description={'Вы ничего не добавляли в закладки'}
-						imgUrl={'/img/tears.png'}
+						imgUrl={'img/tears.png'}
 					/>
 				)}
 			</div>

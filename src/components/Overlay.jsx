@@ -4,7 +4,7 @@ import { Info } from './Info';
 import axios from 'axios';
 import { useCart } from '../hooks/useCart';
 
-export const Overlay = ({ onClose, onRemove, items = [] }) => {
+export const Overlay = ({ onClose, onRemove, items = [], opened }) => {
 	const [orderId, setOrderId] = useState(null);
 	const [isOrderComplete, setIsOrderComplete] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
@@ -41,15 +41,19 @@ export const Overlay = ({ onClose, onRemove, items = [] }) => {
 		setIsLoading(false);
 	};
 
+	opened
+		? document.body.classList.add('bodyHidden')
+		: document.body.classList.remove('bodyHidden');
+
 	return (
-		<div className="overlay">
-			<div className="drawer">
+		<div className={`overlay ${opened && 'visibilityOverlay'}`}>
+			<div className={`drawer ${opened && 'visibilityDrawer'}`}>
 				<div className="cardTop">
 					<h2>Корзина</h2>
 					<img
 						onClick={onClose}
 						className="removeBtn"
-						src="/img/btn-remove.svg"
+						src="img/btn-remove.svg"
 						alt="Remove"
 					/>
 				</div>
@@ -71,7 +75,7 @@ export const Overlay = ({ onClose, onRemove, items = [] }) => {
 									<img
 										onClick={() => onRemove(obj.id)}
 										className="removeBtn"
-										src="/img/btn-remove.svg"
+										src="img/btn-remove.svg"
 										alt="Remove"
 									/>
 								</div>
@@ -96,14 +100,14 @@ export const Overlay = ({ onClose, onRemove, items = [] }) => {
 								className="greenButton"
 							>
 								Оформить заказ
-								<img className="btnApply" src="/img/arrow.svg" alt="Arrow" />
+								<img className="btnApply" src="img/arrow.svg" alt="Arrow" />
 							</button>
 						</div>
 					</>
 				) : (
 					<Info
 						image={
-							isOrderComplete ? '/img/complite-order.png' : '/img/empty.png'
+							isOrderComplete ? 'img/complite-order.png' : 'img/empty.png'
 						}
 						title={isOrderComplete ? 'Заказ оформлен' : 'Корзина пуста'}
 						description={

@@ -51,8 +51,8 @@ export const Card = ({
 						<img
 							src={
 								isFavAdded(id)
-									? '/img/heart-liked.svg'
-									: '/img/heart-unliked.svg'
+									? 'img/heart-liked.svg'
+									: 'img/heart-unliked.svg'
 							}
 							alt="Unliked"
 						/>
@@ -71,7 +71,7 @@ export const Card = ({
 						<button onClick={handlePlus}>
 							<img
 								src={
-									isItemAdded(id) ? '/img/btn-checked.svg' : '/img/btn-plus.svg'
+									isItemAdded(id) ? 'img/btn-checked.svg' : 'img/btn-plus.svg'
 								}
 								alt="Plus"
 							/>
