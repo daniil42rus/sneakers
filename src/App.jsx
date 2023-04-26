@@ -168,6 +168,7 @@ function App() {
 				onAddToFavorite,
 				onAddToCart,
 				isFavAdded,
+				searchValue,
 			}}
 		>
 			<div className="wrapper">

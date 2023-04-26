@@ -5,6 +5,9 @@ import { RenderItems } from '../components/RenderItems';
 export const Home = ({ searchValue, onCangeSearchInpue, setSearchValue }) => {
 	const { items } = useContext(AppContext);
 
+
+
+
 	return (
 		<div className="content">
 			<div className="contentHead">
