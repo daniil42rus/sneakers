@@ -5,7 +5,6 @@
 - React
 - React Router
 - React Context
-- React-slick
 - Json-server
 - SASS / CSS Modules
 - Axios
